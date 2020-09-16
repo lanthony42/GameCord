@@ -4,6 +4,7 @@ SCREEN_SIZE = (10, 10)
 BACK = '⬛'
 TICK = 0.5
 MIN_TICK = 0.1
+TIMEOUT = 30.0
 PREFIX = '!'
 
 
@@ -23,6 +24,7 @@ class Game:
 
         # Ensures rate limit won't be reached if isn't solely based on input
         self.tick = max(float(kwargs.get('tick', TICK)), MIN_TICK if self.need_input else TICK)
+        self.timeout = float(kwargs.get('timeout', TIMEOUT))
         self.bot_class = kwargs.get('cls', Bot)
         self.vars = kwargs.get('vars')
         self.option = kwargs
