@@ -1,9 +1,9 @@
 import dotenv
-from gamecord import game
+from gamecord import Game
 import os
 
 
-class Game(game.Game):
+class MyGame(Game):
     def __init__(self):
         super().__init__('game', screen_size=(10, 10), controls=['⬅', '⬆', '⬇', '➡', '🇽'], title='Test Game 1',
                          tick=0.0)
@@ -33,5 +33,5 @@ class Game(game.Game):
 dotenv.load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
 
-g = Game()
+g = MyGame()
 g.run(discord_token)

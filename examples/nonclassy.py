@@ -1,5 +1,5 @@
 import dotenv
-from gamecord.game import Game
+from gamecord import Game
 import os
 
 game = Game('game', screen_size=(10, 10), controls=['⬅', '⬆', '⬇', '➡', '🇽'], title='Test Game 1', tick=0.0)

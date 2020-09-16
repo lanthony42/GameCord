@@ -32,10 +32,8 @@ class Bot(commands.Bot):
             await self.message.remove_reaction(reaction.emoji, user)
 
     async def on_command_error(self, ctx: commands.Context, exception: discord.DiscordException):
-        if isinstance(exception, commands.MissingRequiredArgument):
-            await ctx.send('Missing arguments!')
-        else:
-            raise exception
+        if not isinstance(exception, commands.CommandNotFound):
+            logging.warning(exception)
 
     async def game_command(self, ctx: commands.Context):
         screen = [[self.game.background] * self.game.screen_size[1] for _ in range(self.game.screen_size[0])]
