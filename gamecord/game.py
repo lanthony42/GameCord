@@ -11,6 +11,7 @@ class Game:
     def __init__(self, name: str, **kwargs):
         self.name = name
         self.prefix = kwargs.get('prefix', PREFIX)
+        self.cogs = tuple(kwargs.get('cogs', ()))
         self.aliases = list(kwargs.get('aliases', []))
         self.controls = list(kwargs.get('controls', []))
 
@@ -22,12 +23,13 @@ class Game:
 
         # Ensures rate limit won't be reached if isn't solely based on input
         self.tick = max(float(kwargs.get('tick', TICK)), MIN_TICK if self.need_input else TICK)
+        self.bot_class = kwargs.get('cls', Bot)
         self.vars = kwargs.get('vars')
         self.option = kwargs
 
         self.input = []
         self.over = True
-        self.bot = Bot(self, name=self.name, prefix=self.prefix)
+        self.bot = self.bot_class(self, name=self.name, prefix=self.prefix)
 
     def run(self, token: str):
         self.bot.run(token)

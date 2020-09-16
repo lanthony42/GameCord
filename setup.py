@@ -5,7 +5,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='gamecord',
-    version='0.0.2',
+    version='0.0.3',
     description='A helper framework for making games in Discord with discord.py.',
     long_description_content_type="text/markdown",
     long_description=README,

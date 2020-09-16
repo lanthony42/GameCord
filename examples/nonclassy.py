@@ -34,4 +34,7 @@ def draw(screen: list):
 
 dotenv.load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
-game.run(discord_token)
+if discord_token:
+    game.run(discord_token)
+else:
+    raise ValueError

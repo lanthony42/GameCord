@@ -33,5 +33,8 @@ class MyGame(Game):
 dotenv.load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
 
-g = MyGame()
-g.run(discord_token)
+game = MyGame()
+if discord_token:
+    game.run(discord_token)
+else:
+    raise ValueError

@@ -17,6 +17,13 @@ class Bot(commands.Bot):
         self.name = name
 
     async def on_ready(self):
+        cogs = self.game.cogs
+        for cog in cogs:
+            try:
+                self.load_extension(cog)
+            except commands.ExtensionAlreadyLoaded:
+                logging.warning(f'{cog} has already been loaded!')
+
         await self.change_presence(activity=discord.Game(name=f'{self.game.prefix}{self.name}'),
                                    status=discord.Status.online)
         logging.info('Ready for tagging!')
