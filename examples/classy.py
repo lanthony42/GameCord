@@ -9,7 +9,7 @@ class MyGame(Game):
                          tick=0.0)
         self.ball = [1, 1]
 
-    def update(self):
+    async def update(self):
         if self.input:
             if self.input[0] == '⬅':
                 self.ball[0] -= 1
@@ -25,9 +25,9 @@ class MyGame(Game):
         self.ball[0] = min(max(self.ball[0], 0), self.screen_size[0] - 1)
         self.ball[1] = min(max(self.ball[1], 0), self.screen_size[1] - 1)
 
-    def draw(self, screen: list):
+    async def draw(self, screen: list):
         self.fill_screen(screen)
-        screen[self.ball[0]][self.ball[1]] = '<:dwastarnew:751892195501539399>'
+        screen[self.ball[0]][self.ball[1]] = '😎'
 
 
 dotenv.load_dotenv()

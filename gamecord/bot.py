@@ -2,7 +2,11 @@ import asyncio
 import discord
 from discord.ext import commands
 import logging
+import typing
 import time
+
+TIMEOUT = 15.0
+DELETE = 10.0
 
 
 class Bot(commands.Bot):
@@ -13,6 +17,7 @@ class Bot(commands.Bot):
         self.context = None
         self.message = None
         self.reactions = None
+        self.params = ''
         self.timer = 0.0
         self.game = game
         self.name = name
@@ -35,37 +40,50 @@ class Bot(commands.Bot):
 
     async def on_reaction_add(self, reaction: discord.Reaction, user: discord.User):
         try:
-            if str(reaction.emoji) in self.reactions and user.id == self.context.author.id and \
+            if str(reaction.emoji) in self.reactions and user.id == self.context.author.id and not user.bot and \
                     reaction.message.id == self.message.id:
                 self.game.input.insert(0, reaction.emoji)
                 self.timer = time.time()
 
-                await self.message.remove_reaction(reaction.emoji, user)
-        except AttributeError:
-            logging.info('No context or message currently.')
+                if self.game.auto_clear:
+                    await self.message.remove_reaction(reaction.emoji, user)
+        except (AttributeError, TypeError):
+            logging.info('No context or reactions currently.')
+
+    async def on_reaction_remove(self, reaction: discord.Reaction, user: discord.User):
+        if not self.game.auto_clear:
+            try:
+                if str(reaction.emoji) in self.reactions and user.id == self.context.author.id and not user.bot and \
+                        reaction.message.id == self.message.id:
+                    self.game.input.insert(0, reaction.emoji)
+                    self.timer = time.time()
+            except (AttributeError, TypeError):
+                logging.info('No context or reactions currently.')
 
     async def on_command_error(self, ctx: commands.Context, exception: discord.DiscordException):
         if not isinstance(exception, commands.CommandNotFound):
             logging.warning(exception)
 
-    async def game_command(self, ctx: commands.Context):
+    async def game_command(self, ctx: commands.Context, *, params: typing.Optional[str]):
         screen = [[self.game.background] * self.game.screen_size[1] for _ in range(self.game.screen_size[0])]
         self.game.over = False
         await asyncio.sleep(0.25)
 
         self.context = ctx
+        self.params = params
         self.message = await ctx.send(self.make_screen(screen))
         await self.add_reactions(self.game.controls)
 
         tick = time.time()
         self.timer = time.time()
-        self.game.draw(screen)
+        await self.game.pregame()
+        await self.game.draw(screen)
         await self.message.edit(content=self.make_screen(screen))
 
         while True:
             if not self.game.need_input or self.game.input:
-                self.game.update()
-                self.game.draw(screen)
+                await self.game.update()
+                await self.game.draw(screen)
                 self.game.input = []
 
                 await self.message.edit(content=self.make_screen(screen))
@@ -74,11 +92,15 @@ class Bot(commands.Bot):
                 break
             await asyncio.sleep(max(self.game.tick - (time.time() - tick), 0.0))
             tick = time.time()
+
         await asyncio.sleep(0.25)
+        await self.game.postgame()
         await self.message.clear_reactions()
+
         self.game.over = True
         self.context = None
         self.message = None
+        self.params = ''
 
     async def add_reactions(self, reactions: list):
         self.reactions = reactions
@@ -92,4 +114,20 @@ class Bot(commands.Bot):
         output = ''
         for i in range(len(screen[0])):
             output += ''.join([row[i] for row in screen]) + '\n'
-        return f'{self.game.title}\n{output}\n{self.game.footer}'
+        return f'{self.game.title}\n{output}{self.game.footer}'
+
+    async def get_input(self, ctx: commands.Context, text: str = '', timeout: float = TIMEOUT):
+        def check(msg: discord.Message):
+            return msg.author == ctx.author and msg.channel == ctx.channel
+
+        message = await ctx.send(text if text else 'Input:')
+        try:
+            response = await ctx.bot.wait_for('message', check=check, timeout=timeout)
+            content = response.clean_content
+
+            await response.delete()
+            await message.delete()
+            return content
+        except asyncio.TimeoutError:
+            await message.edit(content='Timed out!', delete_after=DELETE)
+            return ''

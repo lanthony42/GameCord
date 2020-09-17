@@ -7,7 +7,7 @@ ball = [1, 1]
 
 
 @game.set_update()
-def update():
+async def update():
     global ball
 
     if game.input:
@@ -27,9 +27,9 @@ def update():
 
 
 @game.set_draw()
-def draw(screen: list):
+async def draw(screen: list):
     game.fill_screen(screen)
-    screen[ball[0]][ball[1]] = '<:dwastarnew:751892195501539399>'
+    screen[ball[0]][ball[1]] = '😎'
 
 
 dotenv.load_dotenv()

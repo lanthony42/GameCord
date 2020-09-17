@@ -21,6 +21,7 @@ class Game:
         self.title = str(kwargs.get('title', ''))
         self.footer = str(kwargs.get('footer', ''))
         self.need_input = float(kwargs.get('need_input', True))
+        self.auto_clear = float(kwargs.get('auto_clear', False))
 
         # Ensures rate limit won't be reached if isn't solely based on input
         self.tick = max(float(kwargs.get('tick', TICK)), MIN_TICK if self.need_input else TICK)
@@ -33,8 +34,21 @@ class Game:
         self.over = True
         self.bot = self.bot_class(self, name=self.name, prefix=self.prefix)
 
+    @property
+    def params(self):
+        return self.bot.params
+
     def run(self, token: str):
         self.bot.run(token)
+
+    def set_pregame(self):
+        def decorator(func):
+            self.pregame = func
+
+        return decorator
+
+    async def pregame(self):
+        pass
 
     def set_update(self):
         def decorator(func):
@@ -42,7 +56,7 @@ class Game:
 
         return decorator
 
-    def update(self):
+    async def update(self):
         raise NotImplementedError
 
     def set_draw(self):
@@ -51,13 +65,28 @@ class Game:
 
         return decorator
 
-    def draw(self, screen: list):
+    async def draw(self, screen: list):
         raise NotImplementedError
+
+    def set_postgame(self):
+        def decorator(func):
+            self.postgame = func
+
+        return decorator
+
+    async def postgame(self):
+        pass
 
     def fill_screen(self, screen: list):
         for i in range(len(screen)):
             for j in range(len(screen[0])):
                 screen[i][j] = self.background
+
+    async def get_input(self, prompt: str, timeout: int = 0):
+        if timeout > 0:
+            return await self.bot.get_input(self.bot.context, prompt, timeout)
+        else:
+            return await self.bot.get_input(self.bot.context, prompt)
 
     async def change_controls(self, controls: list):
         await self.bot.add_reactions(controls)
