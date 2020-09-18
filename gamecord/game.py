@@ -2,7 +2,7 @@ from .bot import Bot
 
 SCREEN_SIZE = (10, 10)
 BACK = '⬛'
-TICK = 0.5
+TICK = 1.1
 MIN_TICK = 0.1
 TIMEOUT = 30.0
 PREFIX = '!'
@@ -37,6 +37,14 @@ class Game:
     @property
     def params(self):
         return self.bot.params
+
+    @property
+    def width(self):
+        return self.screen_size[0]
+
+    @property
+    def height(self):
+        return self.screen_size[1]
 
     def run(self, token: str):
         self.bot.run(token)

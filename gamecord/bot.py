@@ -32,7 +32,7 @@ class Bot(commands.Bot):
 
         await self.change_presence(activity=discord.Game(name=f'{self.game.prefix}{self.name}'),
                                    status=discord.Status.online)
-        logging.info('Ready for tagging!')
+        logging.info('Ready to play!')
 
     async def on_message(self, message: discord.Message):
         if self.game.over:
@@ -62,24 +62,24 @@ class Bot(commands.Bot):
 
     async def on_command_error(self, ctx: commands.Context, exception: discord.DiscordException):
         if not isinstance(exception, commands.CommandNotFound):
-            logging.warning(exception)
+            raise exception
 
     async def game_command(self, ctx: commands.Context, *, params: typing.Optional[str]):
-        screen = [[self.game.background] * self.game.screen_size[1] for _ in range(self.game.screen_size[0])]
+        screen = [[self.game.background] * self.game.height for _ in range(self.game.width)]
         self.game.over = False
         await asyncio.sleep(0.25)
 
         self.context = ctx
         self.params = params
+
+        await self.game.pregame()
+        await self.game.draw(screen)
         self.message = await ctx.send(self.make_screen(screen))
         await self.add_reactions(self.game.controls)
+        await asyncio.sleep(self.game.tick)
 
         tick = time.time()
         self.timer = time.time()
-        await self.game.pregame()
-        await self.game.draw(screen)
-        await self.message.edit(content=self.make_screen(screen))
-
         while True:
             if not self.game.need_input or self.game.input:
                 await self.game.update()
