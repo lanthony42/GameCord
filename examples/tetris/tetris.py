@@ -5,8 +5,8 @@ import random
 import os
 
 TYPES = list(PIECE.keys())
-INITIAL_DIFF = len(PIECE.keys()) - 4
-GOOD_LIST = ['L', 'J', 'O', 'T', 'I', 'T']
+INITIAL_DIFF = len(PIECE.keys()) - 5
+GOOD_LIST = ['L', 'J', 'O', 'T', 'I', 'T', 'I', 'O', 'J', 'L']
 
 
 class Tetris(Game):
@@ -109,12 +109,12 @@ class Tetris(Game):
 
     def spawn_piece(self):
         if not self.active:
-            choices = list(TYPES) * 2
+            choices = list(TYPES) * (3 if self.difficulty < 0 else 2)
             bad = list(GOOD_LIST)
 
             if self.difficulty <= 0:
                 for i, piece in enumerate(bad):
-                    if random.randint(min(i * 5, 99), 100) <= min(abs(self.difficulty) * 10, 90 + i):
+                    if random.randint(min(i * 4, 99), 100) <= min(abs(self.difficulty) * 8, 90 + i):
                         choices.remove(piece)
                         print(piece)
 
