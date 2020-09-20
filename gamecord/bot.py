@@ -7,6 +7,7 @@ import time
 
 TIMEOUT = 15.0
 DELETE = 10.0
+COOLDOWN = 30.0
 
 
 class Bot(commands.Bot):
@@ -18,6 +19,7 @@ class Bot(commands.Bot):
         self.message = None
         self.reactions = None
         self.params = ''
+        self.cooldown = 0.0
         self.timer = 0.0
         self.game = game
         self.name = name
@@ -35,8 +37,15 @@ class Bot(commands.Bot):
         logging.info('Ready to play!')
 
     async def on_message(self, message: discord.Message):
-        if self.game.over:
-            await self.process_commands(message)
+        ctx = await self.get_context(message, cls=BotContext)
+        if ctx.command and ctx.command.name == self.name:
+            if self.game.over:
+                await self.invoke(ctx)
+            elif time.time() > self.cooldown:
+                await ctx.send(f'{self.context.author.name} is playing right now!')
+                self.cooldown = time.time() + COOLDOWN
+        else:
+            await self.invoke(ctx)
 
     async def on_reaction_add(self, reaction: discord.Reaction, user: discord.User):
         try:
@@ -131,3 +140,10 @@ class Bot(commands.Bot):
         except asyncio.TimeoutError:
             await message.edit(content='Timed out!', delete_after=DELETE)
             return ''
+
+
+class BotContext(commands.Context):
+    @property
+    def game(self):
+        return self.bot.game
+

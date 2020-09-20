@@ -42,7 +42,7 @@ WALL_KICK_I = [[(0, 0), (-2, 0), (1, 0), (-2, -1), (1, 2)],
                [(0, 0), (2, 0), (-1, 0), (2, 1), (-1, -2)],
                [(0, 0), (1, 0), (-2, 0), (1, -2), (-2, 1)],
                ]
-BACK = '⬛'
+BACK = '◼'
 
 
 class Piece:
@@ -87,10 +87,10 @@ class Piece:
         if not self.check_collisions(grid, self.x + vel_x, self.y):
             self.x += vel_x
 
-        for _ in range(vel_y):
+        for i in range(vel_y):
             if not self.check_collisions(grid, self.x, self.y + 1):
                 self.y += 1
-            else:
+            elif i == 0:
                 for x, y in self.blocks:
                     if x < 0 or y < 0:
                         raise IndexError
