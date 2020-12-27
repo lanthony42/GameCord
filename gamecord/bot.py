@@ -12,7 +12,8 @@ COOLDOWN = 30.0
 
 class Bot(commands.Bot):
     def __init__(self, game, name: str, prefix: str):
-        super().__init__(command_prefix=prefix, allowed_mentions=discord.AllowedMentions(everyone=False))
+        super().__init__(command_prefix=prefix, allowed_mentions=discord.AllowedMentions(everyone=False),
+                         intents=discord.Intents.all())
 
         self.add_command(commands.Command(self.game_command, name=name, aliases=game.aliases))
         self.context = None
