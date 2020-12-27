@@ -28,7 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5831fb5c-a565-4d85-a594-78c537219bf8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamecord/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamecord/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,6 +203,14 @@
       <option name="presentableId" value="Default" />
       <updated>1600135257293</updated>
     </task>
+    <task id="LOCAL-00001" summary="Intents!">
+      <created>1609104556348</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609104556348</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,98 +237,8 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="552" y="161" key="#Plugins" timestamp="1600189957319">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="161" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1600189957319" />
-    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600385608304">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600385608304" />
-    <state x="712" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600444222785">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="712" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1600444222785" />
-    <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600189719198">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600189719198" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600573221133">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600573221133" />
-    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600569856196">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1600569856196" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1600294619101">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600294619101" />
-    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1600476584302">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600476584301" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1600620597707">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600620597707" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1600620597707">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600620597707" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1600620597706">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600620597706" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1600620597707">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600620597707" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1600377086660">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600377086660" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1600377086660">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600377086660" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1600377086660">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600377086660" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1600377086660">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600377086660" />
-    <state x="1105" y="228" key="NewModule_or_Project.wizard" timestamp="1600476591870">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="1105" y="228" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1600476591870" />
-    <state x="486" y="169" width="998" height="708" key="SettingsEditor" timestamp="1600570013799">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="486" y="169" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600570013799" />
-    <state x="737" y="254" key="VcsDiffUtil.ChangesDialog" timestamp="1600294609742">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="737" y="254" key="VcsDiffUtil.ChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600294609742" />
-    <state x="667" y="253" width="585" height="534" key="find.popup" timestamp="1600231643781">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="667" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600231643781" />
-    <state x="370" y="172" key="new project wizard" timestamp="1600478005196">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="370" y="172" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1600478005196" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1600380922972">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600380922972" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1600381416487">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600381416487" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Intents!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Intents!" />
   </component>
 </project>
